@@ -66,7 +66,27 @@ exports.getProduct = async (req, res) => {
 }
 
 exports.buyProduct = async (req, res) => {
-    const { productId, sizeId, colorId } = req.body;
+    const { colorId, buyQuantity } = req.body;
+
+await Product.updateOne(
+    {
+        "sizes.colors._id": new mongoose.Types.ObjectId(colorId)
+    },
+    {
+        $inc: {
+            "sizes.$[].colors.$[ele].quantity": -buyQuantity
+        }
+    },
+    {
+        arrayFilters: [
+            { "ele._id": new mongoose.Types.ObjectId('66e11ff0b9799710faf59937') }
+        ]
+    }
+)
+
+     res.status(200).json({
+            message: "updated."
+        })
 
 
 }
