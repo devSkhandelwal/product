@@ -79,7 +79,7 @@ await Product.updateOne(
     },
     {
         arrayFilters: [
-            { "ele._id": new mongoose.Types.ObjectId('66e11ff0b9799710faf59937') }
+            { "ele._id": new mongoose.Types.ObjectId(colorId) }
         ]
     }
 )
